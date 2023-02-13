@@ -133,14 +133,15 @@ class api_v1(object):
     def order_history(self):
         return self.api_call('/v1/orders/hist', {}).json()
 
-    def place_order(self, symbol, amount, price, side, order_type):
+    def place_order(self, symbol, amount, price, side, order_type, **extra):
         param = {
             'symbol': symbol,
             'amount': amount,
             'price': price,
             'exchange': 'bitfinex',
             'side': side,
-            'type': order_type
+            'type': order_type,
+            **extra
         }
         return self.api_call('/v1/order/new', param=param).json()
 
